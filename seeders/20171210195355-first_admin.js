@@ -1,7 +1,6 @@
 'use strict';
-require('ts-node/register');
-const { sequelizeConnection } = require('../src/Lib/sequelizeConnection');
-const { User } = require('../src/Model/User');
+const { sequelizeConnection } = require('../dist/Lib/sequelizeConnection');
+const { User } = require('../dist/Model/User');
 const adminUser = {
 	first_name: 'Admin Name',
 	last_name: 'Admin Last Name',
@@ -13,7 +12,7 @@ const adminUser = {
 module.exports = {
 	up: (queryInterface, Sequelize) => {
 		/**
-		* Requiring a model way
+		* Requiring a compiled model way
 		*/
 		return sequelizeConnection()
 		.then(() => User.create(adminUser) )

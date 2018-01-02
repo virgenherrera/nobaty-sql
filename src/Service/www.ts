@@ -5,7 +5,7 @@ import * as socketIo from 'socket.io';
 import Directories from '../Lib/Directories';
 import { loadEnvironmentVars } from '../Lib/loadEnvironmentVars';
 import { app } from '../app';
-import SocketIoService from '../Lib/SocketIoService';
+import { RealTimeService } from './RealTimeService';
 
 /**
 * Load Environment Variables from .env
@@ -35,8 +35,8 @@ const server = http.createServer(app);
 /**
 * Bind RealTime Service to HTTP server.
 */
-const ioServer		= socketIo( server );
-const rtService		= new SocketIoService( ioServer );
+const ioServer = socketIo( server );
+const rtService = new RealTimeService( ioServer );
 
 /**
 * Listen on provided port, on all network interfaces.

@@ -4,7 +4,7 @@ import { USE_REAL_TIME_SERVICE } from '../config/config';
 
 export let IO: any|null = null;
 
-export default class SocketIoService {
+export class RealTimeService {
 	constructor(ioServer) {
 		if ( !USE_REAL_TIME_SERVICE ) {
 			console.log(`/* Omitting the initialization of the Real-Time Service*/`);

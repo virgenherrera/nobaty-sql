@@ -1,4 +1,4 @@
-import { IO } from '../../Lib/SocketIoService';
+import { IO } from '../../Service/RealTimeService';
 
 
 export function onHi(name: string): any {

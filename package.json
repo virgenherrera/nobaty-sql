@@ -34,7 +34,7 @@
     "provide-dbconfig": "node ./tasks/provideDbConf.js",
     "provide-env": "node ./tasks/provideEnv.js",
     "provide-forever-config": "node ./tasks/provideForeverJson.js",
-    "provide-persistance": "npm-run-all -s -l -c create-database run-migrations run-seeds",
+    "provide-persistance": "npm-run-all -s -l -c build-ts create-database run-migrations run-seeds",
     "create-module": "node ./tasks/createModule.js",
     "create-controller": "node ./tasks/createController.js",
     "create-model": "node ./tasks/createModel.js",

@@ -1,6 +1,6 @@
 import * as dotEnv from 'dotenv';
 import Directories from './Directories';
-import { VALID_ENVIRONMENTS } from '../config/config';
+import { AVAILABLE_ENVIRONMENTS } from '../config/config';
 
 
 /**
@@ -21,9 +21,9 @@ export function loadEnvironmentVars(): void {
 		path: dotEnvFilePath
 	});
 
-	if ( VALID_ENVIRONMENTS.indexOf( process.env.NODE_ENV ) === -1 ) {
+	if ( AVAILABLE_ENVIRONMENTS.indexOf( process.env.NODE_ENV ) === -1 ) {
 		console.log('service can not be started because NODE_ENV was configured with an illegal value.');
-		console.log(`declare NODE_ENV in your .env file or in the terminal with one of the following allowed values:${'\n'}${JSON.stringify(VALID_ENVIRONMENTS)}`);
+		console.log(`declare NODE_ENV in your .env file or in the terminal with one of the following allowed values:${'\n'}${JSON.stringify(AVAILABLE_ENVIRONMENTS)}`);
 		process.exit(1);
 	}
 }

@@ -1,0 +1,13 @@
+"use strict";
+require('ts-node').register();
+const Directories = require('./src/Lib/Directories').default;
+const { loadEnvironmentVars } = require('./src/Lib/loadEnvironmentVars');
+loadEnvironmentVars();
+
+module.exports = {
+	'env' : process.env.NODE_ENV,
+	'config': Directories.getPathToFile('basePath', '/persistance/config.js'),
+	'migrations-path': Directories.migrationsPath,
+	'models-path': Directories.ModelPath,
+	'seeders-path': Directories.seedersPath,
+};

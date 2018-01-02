@@ -25,6 +25,7 @@ coverage
 
 # Bower dependency directory (https://bower.io/)
 bower_components
+public/bower_components
 
 # node-waf configuration
 .lock-wscript
@@ -54,6 +55,16 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+# dist/build folders
+dist/
+build/
+
 # dotenv environment variables file
 .env
+
+# forever config file
+forever.json
+
+# Database config files
+persistance/
 

@@ -1,6 +1,4 @@
 "use strict";
-require('ts-node/register');
-const {dd} = require('../src/Lib/Debug');
 const {
 	existsSync,
 	writeFileSync,
@@ -24,15 +22,15 @@ const attribDeclaration =(attr = null,type = null) => {
 
 return (()=>{
 	let {name=null,attributes=null} = parseCliArgs();
-	const Pascal_Name = toPascalCase( name );
+	const PascalName = toPascalCase( name );
 	let scopeAttribs = '';
 	let attribDefinition = '';
 	const tableNameRegex = new RegExp('{{tableName}}','g');
 	const Class_NameRegex = new RegExp('{{Class_Name}}','g');
 	const attributesArrRegex = new RegExp('{{attributesArr}}','g');
 	const attrDeclarationsRegex = new RegExp('{{attrDeclarations}}','g');
-	const origin = join( __dirname , '../examples/model.example' );
-	const destiny = join(__dirname, `../src/Model/${Pascal_Name}.ts`);
+	const origin = join( __dirname , './lib/templates/model.example' );
+	const destiny = join(__dirname, `../src/Model/${PascalName}.ts`);
 	const fileContent = readFileSync(origin,'utf-8');
 
 	if( !name ){
@@ -57,7 +55,7 @@ return (()=>{
 	const newContent		= fileContent
 	.toString()
 	.replace(tableNameRegex, pluralize( name ))
-	.replace(Class_NameRegex, Pascal_Name)
+	.replace(Class_NameRegex, PascalName)
 	.replace(attributesArrRegex, `${scopeAttribs} `)
 	.replace(attrDeclarationsRegex, attribDefinition);
 

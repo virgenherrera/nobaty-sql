@@ -23,7 +23,7 @@
   "scripts": {
     "start": "npm-run-all -s -l cleanup lint build-ts serve-nodemon",
     "develop": "npm-run-all -s -l -c cleanup lint build-ts serve-development",
-    "production": "npm-run-all -s -l cleanup lint build-ts serve-prod",
+    "production": "npm-run-all -s -l cleanup lint build-ts provide-forever-config serve-prod",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "lint": "node ./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json",
@@ -37,7 +37,7 @@
     "provide-persistance": "npm-run-all -s -l build-ts create-database run-migrations run-seeds",
     "create-module": "node ./tasks/createModule.js",
     "create-controller": "node ./tasks/createController.js",
-    "create-model": "node ./tasks/createModel.js",
+    "create-model": "node ./tasks/createSequelizeModel.js",
     "create-poco": "node ./tasks/createPoco.js",
     "create-repository": "node ./tasks/createRepository.js",
     "create-rest-handler": "node ./tasks/createRestHandler.js",
@@ -47,11 +47,14 @@
     "revert-migrations": "./node_modules/.bin/sequelize db:migrate:undo:all",
     "run-seeds": "./node_modules/.bin/sequelize db:seed:all",
     "revert-seeds": "./node_modules/.bin/sequelize db:seed:undo:all",
-    "sequelize": "./node_modules/.bin/sequelize",
     "serve-development": "npm-run-all -p serve-nodemon-debug watch-ts",
-    "serve-nodemon": "nodemon -w .env -w dist/ -V",
-    "serve-nodemon-debug": "nodemon -w .env -w dist/ -V --inspect",
-    "serve-prod": "forever start forever.json"
+    "serve-nodemon": "./node_modules/.bin/nodemon -w .env -w dist/ -V",
+    "serve-nodemon-debug": "./node_modules/.bin/nodemon -w .env -w dist/ -V --inspect",
+    "serve-prod": "./node_modules/.bin/forever start forever.json",
+    "stop-prod": "./node_modules/.bin/forever stop ./bin/www",
+    "sequelize": "./node_modules/.bin/sequelize",
+    "nodemon": "./node_modules/.bin/nodemon",
+    "forever": "./node_modules/.bin/forever"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

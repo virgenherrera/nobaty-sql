@@ -2,14 +2,13 @@
 const {
 	copyFileSync,
 	existsSync,
-	statSync,
 	mkdirSync,
 }	= require('fs');
-const { join }			= require('path');
+const { join } = require('path');
 
 	return (()=>{
-		const origin			= join( __dirname , '../examples','dbConfig.example' );
-		const destiny			= join( __dirname , '../persistance','config.js' );
+		const origin = join(__dirname, './lib/templates/dbConfig.example');
+		const destiny = join(__dirname, '../persistance', 'config.js');
 
 		if( !existsSync( join(__dirname, '../persistance') ) ){
 			mkdirSync( join(__dirname, '../', 'persistance') )

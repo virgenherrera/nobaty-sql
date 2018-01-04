@@ -4,11 +4,11 @@ const {
 	existsSync,
 	writeFileSync,
 	readFileSync
-}	= require('fs');
-const { join }			= require('path');
+} = require('fs');
+const { join } = require('path');
 const { name } = require('../package.json');
 const { AVAILABLE_ENVIRONMENTS } = require('../src/config/config');
-function persistanceContent(env = null,srvName = null) {
+function persistanceContent(env = null, srvName = null) {
 	if( !env || !srvName ) return;;
 
 	const ENV = env.toUpperCase();
@@ -37,7 +37,7 @@ return (()=>{
 	const PersistanceVarsRegEx = new RegExp("{{PersistanceVars}}", "g");
 	const ServiceName = name;
 	const JwtSecret = Math.random().toString(36).slice(2).toUpperCase();
-	const origin = join(__dirname, '../examples', '.env.example');
+	const origin = join(__dirname, './lib/templates/.env.example');
 	const destiny = join(__dirname, '../', '.env');
 	const fileContent = readFileSync(origin, 'utf-8');
 

@@ -3,11 +3,11 @@ const {
 	existsSync,
 	writeFileSync,
 	readFileSync
-}	= require('fs');
-const { join }			= require('path');
-const ucfirst			= require('./lib/ucfirst');
-const parseCliArgs		= require("./lib/parseCliArgs");
-const letCont			= (attr=null)=>{
+} = require('fs');
+const { join } = require('path');
+const ucfirst = require('./lib/ucfirst');
+const parseCliArgs = require("./lib/parseCliArgs");
+const letCont = (attr = null) => {
 	if(!attr) return;
 	return `			${attr} = null,${"\n"}`;
 }
@@ -20,13 +20,13 @@ return (()=>{
 	let {name=null,attributes=null} = parseCliArgs();
 	let letContent = '';
 	let valContent = '';
-	const moduleRegExp				= new RegExp("{{module}}","g");
-	const ModuleRegExp				= new RegExp("{{Module}}","g");
-	const letDeclarationsRegExp		= new RegExp("{{letDeclarations}}","g");
-	const valAssignationsRegExp		= new RegExp("{{valAssignations}}","g");
-	const origin			= join( __dirname , '../examples/Repository.example' );
-	const destiny			= join(__dirname, `../src/Repository/${ucfirst(name)}.ts`);
-	const fileContent		= readFileSync(origin,'utf-8');
+	const moduleRegExp = new RegExp("{{module}}", "g");
+	const ModuleRegExp = new RegExp("{{Module}}", "g");
+	const letDeclarationsRegExp = new RegExp("{{letDeclarations}}", "g");
+	const valAssignationsRegExp = new RegExp("{{valAssignations}}", "g");
+	const origin = join(__dirname, './lib/templates/Repository.example');
+	const destiny = join(__dirname, `../src/Repository/${ucfirst(name)}.ts`);
+	const fileContent = readFileSync(origin, 'utf-8');
 
 	if( !name ){
 		console.error(`Cannot create unnamed repository`);
@@ -56,7 +56,7 @@ return (()=>{
 	;
 
 	if( existsSync( destiny ) ){
-		console.error(`Cannot Overwrite!${"\n"}Handler:	${destiny}${"\n"}Already Exists`);
+		console.error(`Cannot Overwrite!${"\n"}Repository:	${destiny}${"\n"}Already Exists`);
 		process.exit(1);
 	} else {
 		writeFileSync(destiny,newContent,{encoding:'utf-8'});

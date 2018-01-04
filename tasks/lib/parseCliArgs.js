@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const {argv} = require('yargs');
+const { argv } = require('yargs');
 
 module.exports = function(){
 	let {

@@ -5,14 +5,13 @@ Take advantage of typescript with express js, sequelize, sequelize-cli, socket.i
 These dependencies must be installed globally as the initial step to configure the project environment.
 * yarn
 * typescript
-* forever
 
 So you must follow the next steps in order to correctly initialize this project.
 
 ## Step 0: Install global dependencies
 You can achieve this by executing the following command:
 > Notice: You must prepend the `sudo` command in case you are running on a UNIX-based system.
-* `npm i -g yarn@1.3.2 typescript@2.6.1 forever@0.15.3`
+* `npm i -g yarn@1.3.2 typescript@2.6.1`
 
 ## Step 1: Install project dependencies
 You must execute the `yarn install` command in order to install this project's dependencies.
@@ -26,7 +25,7 @@ Provide required config files by typing in shell following command:
 * ./persistance/config.js [ Database config settings for sequelize-cli ]
 
 ## Step 3: Update .env file
-In this file (`./.env`) you can add the main execution environment settings such as Environment, Port, Database configurations, as well as other environment configurations.
+In this file (`./.env`) is mandatory to add the main execution environment settings such as Environment, Port, Database configurations, as well as other environment configurations.
 
 ## Step 4: Initialize-Provide Data Persistance
 Provide the Database structure by typing the following shell command:
@@ -68,7 +67,6 @@ Notice: some of the following scripts may accept _name or attributes_ parameters
 * `create-poco` Create A new _poco_ according accepting: **--name** and **--attributes** parameters.
 * `create-repository` Create A new _repository_ according accepting: **--name** and **--attributes** parameters.
 * `create-rest-handler` Create A new _rest handler_ according accepting: **--name** and **--attributes** parameters.
-* `sequelize` Shorthand for _node [sequelize-cli-Path]/_**sequelize** cli.
 * `create-database` Shorthand for _node [sequelize-cli-Path]/sequelize_ **db:create** command.
 * `drop-database` Shorthand for _node [sequelize-cli-Path]/sequelize_ **db:drop** command.
 * `run-migrations` Shorthand for _node [sequelize-cli-Path]/sequelize_ **db:seed:all** command.
@@ -79,3 +77,6 @@ Notice: some of the following scripts may accept _name or attributes_ parameters
 * `serve-nodemon` Launch **transpilated** files using the _"nodemon"_ module watching changes in _./.env_ and _./dist/_.
 * `serve-nodemon-debug` Similar to the _serve-nodemon_ script but with the _--inspect_ flag that adds the debugging capability.
 * `serve-prod` Launch the **transpilated** service using the _"forever"_ module.
+* `sequelize` Shorthand for _node [sequelize-cli-Path]/_**sequelize** cli.
+* `nodemon` Shorthand for _node [nodemon-cli-Path]/_**nodemon** cli.
+* `forever` Shorthand for _node [sequelize-cli-Path]/_**forever** cli.

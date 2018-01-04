@@ -1,6 +1,6 @@
 "use strict";
 require("./createController");
 require("./createPoco");
-require('./createModel');
+require('./createSequelizeModel.js');
 require("./createRepository");
 require("./createRestHandler");

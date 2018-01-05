@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { IHandler } from '../../Lib/interfaces';
-import HandlerUtility from '../../Lib/HandlerUtility';
-import renderedJwtAuth from '../../Middleware/renderedJwtAuth';
+import { HandlerUtility } from '../../Lib/HandlerUtility';
+import { renderedJwtAuth } from '../../Middleware/renderedJwtAuth';
 import { UserController } from '../../Controller/User';
 // only for debugging
 // import { dump } from '../../Lib/Debug';

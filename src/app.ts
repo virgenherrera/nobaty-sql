@@ -5,7 +5,7 @@ import * as Handlers from './config/handler';
 import { loadEnvironmentVars } from './Lib/loadEnvironmentVars';
 import Directories from './Lib/Directories';
 import { sequelizeConnection } from './Lib/sequelizeConnection';
-import notFound from './Middleware/notFound';
+import { notFound } from './Middleware/notFound';
 import { middleware } from './config/middleware';
 import { USE_DATA_PERSISTENCE } from './config/config';
 

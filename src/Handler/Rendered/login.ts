@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { IHandler } from '../../Lib/interfaces';
-import HandlerUtility from '../../Lib/HandlerUtility';
+import { HandlerUtility } from '../../Lib/HandlerUtility';
 import { SessionController } from '../../Controller/Session';
 // only for debugging
 // import { dd } from '../../Lib/Debug';

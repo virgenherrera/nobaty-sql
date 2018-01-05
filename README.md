@@ -22,14 +22,14 @@ Provide required config files by typing in shell following command:
 ### This will create the following environment files:
 * ./.env [ Main environment file ].
 * ./forever.json [ forever settings for execution in production mode ]
-* ./persistance/config.js [ Database config settings for sequelize-cli ]
+* ./persistence/config.js [ Database config settings for sequelize-cli ]
 
 ## Step 3: Update .env file
 In this file (`./.env`) is mandatory to add the main execution environment settings such as Environment, Port, Database configurations, as well as other environment configurations.
 
-## Step 4: Initialize-Provide Data Persistance
+## Step 4: Initialize-Provide Data Persistence
 Provide the Database structure by typing the following shell command:
-* `yarn provide-persistance`
+* `yarn init-persistence`
 
 > **Script Explanation:**
 This command will try to create ONE database, corresponding to the prefix of `NODE_ENV` and to one of the following environment variables `DEVELOPMENT_DB_DATABASE`, `TEST_DB_DATABASE`, `PRODUCTION_DB_DATABASE`, which were defined in step named: [Update .env file](#step-3-update-env-file); Subsequently will create and/or update the structure of that database according to the schematic definitions described in the files of the directory `./migrations/`, then will execute initial data population by running described by files under `./seeders/` directory.
@@ -60,7 +60,7 @@ Notice: some of the following scripts may accept _name or attributes_ parameters
 * `provide-dbconfig` Creates the database config settings for sequelize-cli in _./persistence/config.js_.
 * `provide-env` Creates the main Environment file in _./.env_.
 * `provide-forever-config` Creates the forever execution config file in _./forever.json_.
-* `provide-persistance` Run _create-database, run-migrations, run-seeds_ scripts sequentially.
+* `init-persistence` Run _create-database, run-migrations, run-seeds_ scripts sequentially.
 * `create-module` Will Create a new _controller_, _model_, _poco_, _repository_, _rest handler_ accepting: **--name** and **--attributes** parameters.
 * `create-controller` Create A new _controller_ according accepting: **--name** and **--attributes** parameters.
 * `create-model` Create A new _model_ according accepting: **--name** and **--attributes** parameters.

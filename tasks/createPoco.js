@@ -5,7 +5,7 @@ const {
 	readFileSync
 } = require('fs');
 const { join } = require('path');
-const ucfirst = require('./lib/ucfirst');
+const toPascalCase = require('./lib/toPascalCase');
 const parseCliArgs = require("./lib/parseCliArgs");
 const propCont = (attr = null, type = null) => {
 	if(!attr || !type) return;
@@ -25,7 +25,7 @@ return (()=>{
 	const propDefinitionRegExp = new RegExp("{{propDefinition}}", "g");
 	const propAssignRegExp = new RegExp("{{propAssign}}", "g");
 	const origin = join(__dirname, './lib/templates/poco.example');
-	const destiny = join(__dirname, `../src/Poco/${ucfirst(name)}.ts`);
+	const destiny = join(__dirname, `../src/Poco/${toPascalCase(name)}.ts`);
 	const fileContent = readFileSync(origin, 'utf-8');
 
 	if( !name ){
@@ -49,7 +49,7 @@ return (()=>{
 
 	const newContent = fileContent
 	.toString()
-	.replace(ModuleRegExp, ucfirst(name))
+	.replace(ModuleRegExp, toPascalCase(name))
 	.replace(propDefinitionRegExp, propContent)
 	.replace(propAssignRegExp, propAssignContent)
 	;

@@ -6,6 +6,7 @@ const {
 } = require('fs');
 const { join } = require('path');
 const ucfirst = require('./lib/ucfirst');
+const toPascalCase = require('./lib/toPascalCase');
 const parseCliArgs = require("./lib/parseCliArgs");
 const letCont = (attr = null) => {
 	if(!attr) return;
@@ -25,7 +26,7 @@ return (()=>{
 	const letDeclarationsRegExp = new RegExp("{{letDeclarations}}", "g");
 	const valAssignationsRegExp = new RegExp("{{valAssignations}}", "g");
 	const origin = join(__dirname, './lib/templates/Repository.example');
-	const destiny = join(__dirname, `../src/Repository/${ucfirst(name)}.ts`);
+	const destiny = join(__dirname, `../src/Repository/${toPascalCase(name)}.ts`);
 	const fileContent = readFileSync(origin, 'utf-8');
 
 	if( !name ){
@@ -50,7 +51,7 @@ return (()=>{
 	const newContent = fileContent
 	.toString()
 	.replace(moduleRegExp, name)
-	.replace(ModuleRegExp, ucfirst(name))
+	.replace(ModuleRegExp, toPascalCase(name))
 	.replace(letDeclarationsRegExp, letContent+`		`)
 	.replace(valAssignationsRegExp, valContent)
 	;

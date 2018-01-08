@@ -1,6 +1,6 @@
 import { IcrudController } from '../Lib/interfaces';
-import { {{Module}}Repository } from '../Repository/{{module}}';
-import { {{Module}} } from '../Poco/{{module}}';
+import { {{Module}}Repository } from '../Repository/{{Module}}';
+import { {{Module}} } from '../Poco/{{Module}}';
 // only for debugging
 // import { dd } from '../Lib/Debug';
 

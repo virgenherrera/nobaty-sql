@@ -6,7 +6,7 @@ const {
 	readFileSync
 } = require('fs');
 const { join } = require('path');
-const ucfirst = require('./lib/ucfirst');
+const toPascalCase = require('./lib/toPascalCase');
 const parseCliArgs = require("./lib/parseCliArgs");
 
 return (()=>{
@@ -17,7 +17,7 @@ return (()=>{
 	const fileContent = readFileSync(origin, 'utf-8');
 	const lowerRegEx = new RegExp("{{module}}", "g");
 	const CamelRegEx = new RegExp("{{Module}}", "g");
-	const CamelName = ucfirst(name);
+	const CamelName = toPascalCase(name);
 	const newContent = fileContent.toString().replace(lowerRegEx, name).replace(CamelRegEx, CamelName);
 	const exportHandler = `export { default as api_${name} } from '../Handler/Restful/${name}';${"\n"}`;
 

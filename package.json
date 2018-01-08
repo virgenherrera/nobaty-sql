@@ -35,7 +35,7 @@
     "provide-env": "node ./tasks/provideEnv.js",
     "provide-forever-config": "node ./tasks/provideForeverJson.js",
     "init-persistence": "npm-run-all -s -l build-ts create-database run-migrations run-seeds",
-    "create-module": "node ./tasks/createModule.js",
+    "generate": "node ./tasks/createModule.js",
     "create-controller": "node ./tasks/createController.js",
     "create-model": "node ./tasks/createSequelizeModel.js",
     "create-poco": "node ./tasks/createPoco.js",

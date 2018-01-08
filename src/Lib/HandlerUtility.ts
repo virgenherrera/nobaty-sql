@@ -63,19 +63,19 @@ export class HandlerUtility {
 	get sort(): object {
 		const { query = {} } = this.req;
 		const { sort = '' } = query;
-		const Res = {};
+		const Res = [];
 
 		const parsed = sort
 			.split(',')
-			.forEach((item: string) => {
-				if (!item) { return; }
-				let order = 'asc';
-				if (item.charAt(0) === '-') {
-					order = 'desc';
-					item = item.substring(1);
+			.forEach((field: string) => {
+				if (!field) { return; }
+				let order = 'ASC';
+				if (field.charAt(0) === '-') {
+					order = 'DESC';
+					field = field.substring(1);
 				}
 
-				Res[item] = order;
+				Res.push([field, order]);
 			});
 
 		return Res;

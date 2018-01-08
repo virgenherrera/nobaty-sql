@@ -1,6 +1,24 @@
+#!/usr/bin/env node
+
 "use strict";
-require("./createController");
-require("./createPoco");
-require('./createSequelizeModel.js');
-require("./createRepository");
-require("./createRestHandler");
+const parseCliArgs = require("./lib/parseCliArgs");
+const { mod = [] } = parseCliArgs();
+
+mod.forEach(m => {
+
+	if (m === 'rest-handler') {
+		return require("./createRestHandler");
+	}
+	if (m === 'controller') {
+		return require("./createController");
+	}
+	if (m === 'poco') {
+		return require("./createPoco");
+	}
+	if (m === 'repository') {
+		return require("./createRepository");
+	}
+	if (m === 'model') {
+		return require('./createSequelizeModel');
+	}
+});

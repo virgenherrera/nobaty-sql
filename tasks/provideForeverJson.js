@@ -1,4 +1,6 @@
-'use strict';
+#!/usr/bin/env node
+
+"use strict";
 const { join } = require('path');
 const { existsSync, mkdirSync } = require('fs');
 const { readFileSync, writeFileSync } = require('fs');

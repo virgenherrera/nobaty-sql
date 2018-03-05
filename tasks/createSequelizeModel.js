@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 "use strict";
 const {
 	existsSync,
@@ -15,7 +17,32 @@ const scopeIncl = (attr = null) => {
 };
 const attribDeclaration =(attr = null,type = null) => {
 	if( !attr || !type ) return;
-	if( type == 'date' ) type = ucfirst(type);
+	switch ( type.toUpperCase() ) {
+		case 'TEXT':
+			type = 'string';
+		break;
+		case 'STRING':
+			type = 'string';
+		break;
+		case 'UUID':
+			type = 'string';
+		break;
+		case 'BOOLEAN':
+			type = 'boolean';
+		break;
+		case 'INTEGER':
+			type = 'number';
+		break;
+		case 'DATE':
+			type = 'Date';
+		break;
+		case 'BLOB':
+			type = 'Buffer';
+		break;
+		default:
+			type = type.toLowerCase();
+		break;
+	}
 	return `${'\t'}@Column${'\n\t'}${attr}: ${type};${'\n\n'}`;
 };
 

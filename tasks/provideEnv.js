@@ -1,15 +1,13 @@
+#!/usr/bin/env node
+
 "use strict";
 require('ts-node/register');
-const {
-	existsSync,
-	writeFileSync,
-	readFileSync
-} = require('fs');
+const { existsSync, writeFileSync, readFileSync } = require('fs');
 const { join } = require('path');
 const { name } = require('../package.json');
 const { AVAILABLE_ENVIRONMENTS } = require('../src/config/config');
 function persistenceContent(env = null, srvName = null) {
-	if( !env || !srvName ) return;;
+	if (!env || !srvName) return;
 
 	const ENV = env.toUpperCase();
 	let Res = `${'\n'}`;
@@ -30,7 +28,7 @@ AVAILABLE_ENVIRONMENTS.forEach(Env => {
 });
 
 
-return (()=>{
+return (() => {
 	const FirstEnvRegEx = new RegExp("{{FirstEnv}}", "g");
 	const serviceNameRegEx = new RegExp("{{SERVICE_NAME}}", "g");
 	const jwtSecretRegEx = new RegExp("{{JWT_SECRET}}", "g");
@@ -43,17 +41,18 @@ return (()=>{
 
 
 	const newContent = fileContent
-	.toString()
-	.replace(FirstEnvRegEx, AVAILABLE_ENVIRONMENTS[0])
-	.replace(serviceNameRegEx, ServiceName)
-	.replace(jwtSecretRegEx,JwtSecret)
-	.replace(PersistenceVarsRegEx, PersistenceVars)
-	;
+		.toString()
+		.replace(FirstEnvRegEx, AVAILABLE_ENVIRONMENTS[0])
+		.replace(serviceNameRegEx, ServiceName)
+		.replace(jwtSecretRegEx, JwtSecret)
+		.replace(PersistenceVarsRegEx, PersistenceVars);
 
-	if( existsSync( destiny ) ){
+	if (existsSync(destiny)) {
 		console.error(`Cannot Overwrite!${"\n"}Handler:	${destiny}${"\n"}Already Exists`);
 		process.exit(1);
 	} else {
-		writeFileSync(destiny,newContent,{encoding:'utf-8'});
+		writeFileSync(destiny, newContent, {
+			encoding: 'utf-8'
+		});
 	}
 })();

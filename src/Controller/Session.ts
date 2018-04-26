@@ -1,14 +1,14 @@
 import { sign, verify } from 'jsonwebtoken';
-import { IcreateAction } from '../Lib/interfaces';
+import { ICreateAction } from '../Lib/interfaces';
 import { SessionRepository } from '../Repository/Session';
 import { Session } from '../Poco/session';
 // only for debugging
 // import { dd } from '../Lib/Debug';
 
 /* Session Controller Class */
-export class SessionController implements IcreateAction {
-	secret: string	= process.env.JWT_SECRET;
-	options: object	= { expiresIn: process.env.JWT_EXPIRATION };
+export class SessionController implements ICreateAction {
+	secret: string = process.env.JWT_SECRET;
+	options: object = { expiresIn: process.env.JWT_EXPIRATION };
 
 	get repository() {
 		return new SessionRepository;
@@ -29,7 +29,7 @@ export class SessionController implements IcreateAction {
 			decodedToken = verify(token, this.secret);
 			const data = await this.repository.FindOne(decodedToken);
 
-			return new Session( decodedToken );
+			return new Session(decodedToken);
 
 		} catch (E) {
 			throw E;

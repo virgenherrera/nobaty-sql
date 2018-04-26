@@ -1,5 +1,3 @@
-const { trace } = console;
-
 export function dump(...args) {
 	console.log(`\n//*------- start Data dumping...`);
 	for (const arg in args) {
@@ -32,6 +30,8 @@ export function dump(...args) {
 }
 
 export function die() {
+	const { trace } = console;
+
 	console.log('\n\n\nnow Process will die\n\n');
 	trace();
 	process.exit();

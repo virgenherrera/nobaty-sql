@@ -21,12 +21,17 @@ class Directories {
 	public RepositoryPath: string = join(this.srcPath, '/Repository');
 	public ServicePath: string = join(this.srcPath, '/Service');
 
+	public emailTemplatesPath: string = join(this.basePath, '/emailTemplates');
 	public logsPath: string = join(this.basePath, '/logs');
-	public migrationsPath: string = join(this.basePath, '/migrations');
 	public publicPath: string = join(this.basePath, '/public');
 	public seedersPath: string = join(this.basePath, '/seeders');
 	public tasksPath: string = join(this.basePath, '/tasks');
+	public uploadsPath: string = join(this.basePath, '/uploads');
 	public viewsPath: string = join(this.basePath, '/views');
+
+	public publicLogoStoresPath: string = join(this.basePath, '/public/assets/img/logo/store');
+	public publicPromoImagesPath: string = join(this.basePath, '/public/assets/img/promo/');
+	public publicUserAvatarPath: string = join(this.basePath, '/public/assets/img/avatar/user');
 
 	getPathToFile(dir: string, file: string | null): string {
 		return (dir in this) ? join(this[dir], file) : null;

@@ -9,7 +9,10 @@ import {
 	Delete,
 	Error400,
 	Error401,
-	Error500
+	Error404,
+	Error406,
+	Error500,
+	Error403,
 } from './restDtoResponses';
 
 export class HandlerUtility {
@@ -91,8 +94,8 @@ export class HandlerUtility {
 
 		const reqParamsArr = paramString
 			.map((p) => {
-				if (p in Req) {
-					return (typeof Req[p] === 'object') ? Req[p] : { [p]: Req[p] };
+				if (Req.hasOwnProperty(p)) {
+					return (typeof Req[p] === 'object' && !(p === 'decodedToken' || p === 'authenticatedAccount')) ? Req[p] : { [p]: Req[p] };
 				}
 			});
 		params = params.concat(reqParamsArr);
@@ -137,21 +140,48 @@ export class HandlerUtility {
 	}
 
 	public ErrorJsonResponse(params): Response {
+		const { trace } = console;
 		const { method } = this.req;
 		const Res = this.res;
 		const {
+			type = 0,
 			name = null,
 			message = null
 		} = params;
+		delete params.type;
+
 		let Err;
 		if (method === 'LOGIN' || name === 'JsonWebTokenError') {
 			Err = new Error401(params);
-		} else if (message) {
-			Err = new Error400(params.message);
-		} else {
-			Err = new Error500(params);
+			return Res.status(Err.status).json(Err);
 		}
 
+		switch (parseInt(type, 10)) {
+			case 400:
+				Err = new Error400(params);
+				break;
+			case 401:
+				Err = new Error401(params);
+				break;
+			case 403:
+				Err = new Error403(params);
+				break;
+			case 404:
+				Err = new Error404(params);
+				break;
+			case 406:
+				Err = new Error406(params);
+				break;
+			case 500:
+				Err = new Error500(params);
+				break;
+
+			default:
+				Err = new Error500(params);
+				break;
+		}
+
+		trace();
 		return Res.status(Err.status).json(Err);
 	}
 }

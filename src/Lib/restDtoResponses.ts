@@ -28,7 +28,19 @@ export class Error400 implements IResDto {
 export class Error401 implements IResDto {
 	public status = 401;
 	public success = false;
-	public message = 'Authentication failed';
+	public message = 'Unauthorized: Access is denied due to invalid credentials or permissions.';
+	public errors;
+
+	constructor(message = null) {
+		if (message) { this.errors = message; }
+	}
+}
+
+// Forbidden
+export class Error403 implements IResDto {
+	public status = 403;
+	public success = false;
+	public message = 'The server understood the request, but is refusing to fulfill it. Authorization will not help and the request SHOULD NOT be repeated.';
 	public errors;
 
 	constructor(message = null) {
@@ -136,7 +148,10 @@ export class Delete implements IResDto {
 	public status = 200;
 	public success = true;
 	public message = 'Resource deleted';
+	public data;
 
 	constructor(params) {
+		if (params) { this.data = params; }
+
 	}
 }

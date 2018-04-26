@@ -69,3 +69,6 @@ persistence/
 
 # forever logs folder
 logs/
+
+# uploads folder
+uploads/

@@ -2,7 +2,9 @@
 
 "use strict";
 const parseCliArgs = require("./lib/parseCliArgs");
-const { mod = [] } = parseCliArgs();
+const {
+	mod = []
+} = parseCliArgs();
 
 mod.forEach(m => {
 
@@ -16,9 +18,10 @@ mod.forEach(m => {
 		return require("./createPoco");
 	}
 	if (m === 'repository') {
-		return require("./createRepository");
+		return require("./createMongooseRepository");
 	}
 	if (m === 'model') {
-		return require('./createSequelizeModel');
+		return require('./createMongooseModel');
+
 	}
 });

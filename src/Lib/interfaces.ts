@@ -43,38 +43,42 @@ export interface IController {
 	readonly repository: any;
 }
 
-export interface IcreateAction extends IController {
+export interface ICreateAction extends IController {
 	createAction(p: any): Promise<any>;
 }
 
-export interface IlistAction extends IController {
+export interface IListAction extends IController {
 	listAction(p: any): Promise<any>;
 }
 
-export interface IshowAction extends IController {
+export interface IShowAction extends IController {
 	showAction(p: any): Promise<any>;
 }
 
-export interface IeditAction extends IController {
+export interface IEditAction extends IController {
 	editAction(p: any): Promise<any>;
 }
 
-export interface IdeleteAction extends IController {
+export interface IDeleteAction extends IController {
 	deleteAction(p: any): Promise<any>;
 }
 
-export interface IcrudController extends
+export interface ICrudController extends
 	IController,
-	IlistAction,
-	IshowAction,
-	IeditAction,
-	IdeleteAction { }
+	ICreateAction,
+	IListAction,
+	IShowAction,
+	IEditAction,
+	IDeleteAction { }
 
 export interface IGetById {
 	GetById(p: any): Promise<any>;
 }
 export interface IFindOne {
 	FindOne(p: any): Promise<any>;
+}
+export interface IFindBy {
+	FindBy(p: any): Promise<any>;
 }
 export interface IGetAll {
 	GetAll(p: any): Promise<any>;
@@ -90,8 +94,10 @@ export interface IDelete {
 }
 
 
-export interface IfullRepository extends
+export interface IFullRepository extends
 	IGetById,
+	IFindOne,
+	IFindBy,
 	IGetAll,
 	ICreate,
 	IUpdate,

@@ -2,22 +2,24 @@
 
 "use strict";
 require('ts-node/register');
+
 const { existsSync, writeFileSync, readFileSync } = require('fs');
 const { join } = require('path');
 const { name } = require('../package.json');
 const { AVAILABLE_ENVIRONMENTS } = require('../src/config/config');
+
 function persistenceContent(env = null, srvName = null) {
 	if (!env || !srvName) return;
 
 	const ENV = env.toUpperCase();
 	let Res = `${'\n'}`;
 
-	Res += `${ ENV }_DB_USERNAME=postgres${ '\n' }`;
-	Res += `${ ENV }_DB_PASSWORD=postgres${ '\n' }`;
-	Res += `${ ENV }_DB_DATABASE=${ srvName }_${ENV.toLowerCase()}${ '\n' }`;
-	Res += `${ ENV }_DB_HOST=127.0.0.1${ '\n' }`;
-	Res += `${ ENV }_DB_DIALECT=postgres${ '\n' }`;
-	Res += `${ ENV }_DB_PORT=5432${ '\n' }`;
+	Res += `${ENV}_DB_USERNAME=postgres${'\n'}`;
+	Res += `${ENV}_DB_PASSWORD=postgres${'\n'}`;
+	Res += `${ENV}_DB_DATABASE=${srvName}_${ENV.toLowerCase()}${'\n'}`;
+	Res += `${ENV}_DB_HOST=127.0.0.1${'\n'}`;
+	Res += `${ENV}_DB_DIALECT=postgres${'\n'}`;
+	Res += `${ENV}_DB_PORT=5432${'\n'}`;
 
 	return Res;
 }
@@ -35,11 +37,9 @@ return (() => {
 	const PersistenceVarsRegEx = new RegExp("{{PersistenceVars}}", "g");
 	const ServiceName = name;
 	const JwtSecret = Math.random().toString(36).slice(2).toUpperCase();
-	const origin = join(__dirname, './lib/templates/.env.example');
+	const origin = join(__dirname, '../.env.example');
 	const destiny = join(__dirname, '../', '.env');
 	const fileContent = readFileSync(origin, 'utf-8');
-
-
 	const newContent = fileContent
 		.toString()
 		.replace(FirstEnvRegEx, AVAILABLE_ENVIRONMENTS[0])
@@ -48,8 +48,7 @@ return (() => {
 		.replace(PersistenceVarsRegEx, PersistenceVars);
 
 	if (existsSync(destiny)) {
-		console.error(`Cannot Overwrite!${"\n"}Handler:	${destiny}${"\n"}Already Exists`);
-		process.exit(1);
+		console.log(`File: "${destiny}" already exists!`);
 	} else {
 		writeFileSync(destiny, newContent, {
 			encoding: 'utf-8'

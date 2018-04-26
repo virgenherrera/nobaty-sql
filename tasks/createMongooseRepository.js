@@ -11,20 +11,18 @@ function letCont(attr = null) {
 
 function valAssign(attr = null) {
 	if (!attr) return;
-	return `		if ( ${attr} ) { Entity.${attr} = ${attr}; }${"\n"}`;
+	return `		if (${attr}) { Entity.${attr} = ${attr}; }${"\n"}`;
 }
 
 return (() => {
-	let {
-		name = null, attributes = null
-	} = parseCliArgs();
+	const { name = null, attributes = null } = parseCliArgs();
 	let letContent = '';
 	let valContent = '';
 	const moduleRegExp = new RegExp("{{module}}", "g");
 	const ModuleRegExp = new RegExp("{{Module}}", "g");
 	const letDeclarationsRegExp = new RegExp("{{letDeclarations}}", "g");
 	const valAssignationsRegExp = new RegExp("{{valAssignations}}", "g");
-	const origin = join(__dirname, './lib/templates/Repository.example');
+	const origin = join(__dirname, './lib/templates/mongooseRepository.example');
 	const destiny = join(__dirname, `../src/Repository/${toPascalCase(name)}.ts`);
 	const fileContent = readFileSync(origin, 'utf-8');
 
@@ -55,7 +53,7 @@ return (() => {
 		.replace(valAssignationsRegExp, valContent);
 
 	if (existsSync(destiny)) {
-		console.error(`Cannot Overwrite!${"\n"}Repository:	${destiny}${"\n"}Already Exists`);
+		console.error(`Cannot Overwrite!${"\n"}Handler:	${destiny}${"\n"}Already Exists`);
 		process.exit(1);
 	} else {
 		writeFileSync(destiny, newContent, {

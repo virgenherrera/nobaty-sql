@@ -8,7 +8,7 @@ const {
 	to_snake_case,
 	TO_CONSTANT_CASE,
 	ToTitleCase,
-} = require('../../src/Helpers/stringTransform');
+} = require('../../src/Helper/stringTransform');
 
 module.exports = {
 	lcFirst: lcFirst,

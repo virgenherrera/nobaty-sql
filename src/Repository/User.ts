@@ -1,21 +1,25 @@
 import { User } from '../Model/User';
-import { IfullRepository } from '../Lib/interfaces';
+import { IFullRepository } from '../Lib/interfaces';
 // only for debugging
 // import { dd } from '../Lib/Debug';
 
-export class UserRepository implements IfullRepository {
+export class UserRepository implements IFullRepository {
 	async GetById({ id = null, scope = 'default' }): Promise<any> {
-		return await User.scope( scope ).findById(id);
+		return await User.scope(scope).findById(id);
 	}
 
 	async FindOne(params, scope: string = 'default'): Promise<any> {
-		return await User.scope( scope ).findOne(params);
+		return await User.scope(scope).findOne(params);
+	}
+
+	async FindBy(params, scope: string = 'default'): Promise<any> {
+		return await User.scope(scope).findOne(params);
 	}
 
 	async GetAll({ where = {}, limit = null, offset = null, sort = [], scope = 'default' }): Promise<any> {
-		const Wh = {where, limit, offset, order: sort};
+		const Wh = { where, limit, offset, order: sort };
 
-		return await User.scope( scope ).findAndCountAll(Wh);
+		return await User.scope(scope).findAndCountAll(Wh);
 	}
 
 	async Create(params): Promise<any> {
@@ -46,7 +50,7 @@ export class UserRepository implements IfullRepository {
 
 	async Delete(id): Promise<any> {
 		const Wh = {
-			where: {id}
+			where: { id }
 		};
 		return await User.destroy(Wh);
 	}

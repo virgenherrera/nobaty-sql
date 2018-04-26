@@ -1,14 +1,14 @@
 import * as dotEnv from 'dotenv';
-import Directories from './Directories';
+import { Directories } from '../Library/Directories';
 import { AVAILABLE_ENVIRONMENTS } from '../config/config';
 
 /**
 * Loads Environment Variables from /.env file
 */
 export function loadEnvironmentVars(): void {
-	const dotEnvFilePath = Directories.getPathToFile('basePath', '.env');
+	const dotEnvFilePath = Directories.getInstance().getPathToFile('basePath', '.env');
 
-	if (!Directories.fileExists('basePath', '.env')) {
+	if (!Directories.getInstance().fileExists('basePath', '.env')) {
 		console.log('cannot to load "ENVIRONMENT" vars');
 		console.log('please be sure to have a properly defined ".env" file at this project root');
 		console.log(`must be placed in: "${dotEnvFilePath}"`);

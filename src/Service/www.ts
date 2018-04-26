@@ -2,15 +2,19 @@ import * as http from 'http';
 import * as debug from 'debug';
 import * as os from 'os';
 import * as socketIo from 'socket.io';
-import Directories from '../Lib/Directories';
 import { loadEnvironmentVars } from '../Lib/loadEnvironmentVars';
-import { app } from '../app';
+import { Application } from '../app';
 import { RealTimeService } from './RealTimeService';
 
 /**
-* Load Environment Variables from .env
-*/
+ * Load Environment Variables from .env
+ */
 loadEnvironmentVars();
+
+/**
+ * Load Application
+ */
+const app = Application.getInstance();
 
 /**
 * declare Service PORT
@@ -35,8 +39,8 @@ const server = http.createServer(app);
 /**
 * Bind RealTime Service to HTTP server.
 */
-const ioServer = socketIo( server );
-const rtService = new RealTimeService( ioServer );
+const ioServer = socketIo(server);
+const rtService = new RealTimeService(ioServer);
 
 /**
 * Listen on provided port, on all network interfaces.
@@ -48,7 +52,7 @@ server.on('listening', onListening);
 /**
 * Normalize a port into a number, string, or false.
 */
-function normalizePort(val: number|string): number|string|boolean {
+function normalizePort(val: number | string): number | string | boolean {
 	const pt: any = Number(val);
 
 	if (isNaN(pt)) {
@@ -69,12 +73,12 @@ function onError(error: NodeJS.ErrnoException): void {
 	switch (error.code) {
 		case 'EACCES':
 			console.error(`${bind} requires elevated privileges`);
-		process.exit(1);
-		break;
+			process.exit(1);
+			break;
 		case 'EADDRINUSE':
 			console.error(`${bind} is already in use`);
-		process.exit(1);
-		break;
+			process.exit(1);
+			break;
 		default:
 			throw error;
 	}
@@ -95,9 +99,9 @@ function onListening(): void {
 	// inform about localhost ip addresses
 	const interfaces = os.networkInterfaces();
 	for (const k in interfaces) {
-		if ( interfaces.hasOwnProperty(k) ) {
+		if (interfaces.hasOwnProperty(k)) {
 			for (const k2 in interfaces[k]) {
-				if ( interfaces[k].hasOwnProperty(k2) ) {
+				if (interfaces[k].hasOwnProperty(k2)) {
 					const address = interfaces[k][k2];
 
 					if (address.family === 'IPv4' && !address.internal) {

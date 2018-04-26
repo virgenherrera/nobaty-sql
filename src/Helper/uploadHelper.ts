@@ -1,10 +1,12 @@
 import { existsSync, mkdirSync } from 'fs';
 import * as multer from 'multer';
-import Directories from '../Lib/Directories';
+import { Directories } from '../Library/Directories';
+
+const dirs = new Directories;
 
 // Create uploads directory if does not exist
-if (!existsSync(Directories.uploadsPath)) {
-	mkdirSync(Directories.uploadsPath);
+if (!existsSync(dirs.uploadsPath)) {
+	mkdirSync(dirs.uploadsPath);
 }
 
 
@@ -28,11 +30,11 @@ function imageFilter(req, file, cb) {
 
 
 export const imageUpload = multer({
-	dest: Directories.uploadsPath,
+	dest: dirs.uploadsPath,
 	fileFilter: imageFilter
 });
 
 // export const videoUpload = multer({
-// 	dest: Directories.uploadsPath,
+// 	dest: dirs.uploadsPath,
 // 	fileFilter: videoFilter
 // });

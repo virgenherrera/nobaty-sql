@@ -3,14 +3,14 @@ import * as moment from 'moment';
 import * as favicon from 'serve-favicon';
 import * as Handlers from './config/handler';
 import { loadEnvironmentVars } from './Lib/loadEnvironmentVars';
-import Directories from './Lib/Directories';
+import { Directories } from './Library/Directories';
 import { sequelizeConnection } from './Lib/sequelizeConnection';
 import { notFound } from './Middleware/notFound';
 import { middleware } from './config/middleware';
 import { USE_DATA_PERSISTENCE } from './config/config';
 
 // Create and config a new expressJs web Application
-class Application {
+export class Application {
 
 	public express: Express.Application;
 
@@ -39,6 +39,11 @@ class Application {
 			;
 	}
 
+	static getInstance() {
+		const app = new Application;
+		return app.express;
+	}
+
 	middleware(): this {
 		middleware.forEach(mid => {
 			this.express.use(mid);
@@ -49,14 +54,14 @@ class Application {
 
 	viewsConfig(): this {
 		// view engine setup
-		this.express.set('views', Directories.viewsPath);
+		this.express.set('views', Directories.getInstance().viewsPath);
 		this.express.set('view engine', 'pug');
 
 		return this;
 	}
 
 	exposePubicPath(): this {
-		this.express.use(Express.static(Directories.publicPath));
+		this.express.use(Express.static(Directories.getInstance().publicPath));
 
 		return this;
 	}
@@ -92,6 +97,3 @@ class Application {
 		await sequelizeConnection();
 	}
 }
-
-const { express } = new Application;
-export const app = express;

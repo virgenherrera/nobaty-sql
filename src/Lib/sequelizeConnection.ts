@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import Directories from '../Lib/Directories';
+import { Directories } from '../Library/Directories';
 
 export async function sequelizeConnection(): Promise<void> {
 	const ENV = process.env.NODE_ENV.toUpperCase();
@@ -10,7 +10,7 @@ export async function sequelizeConnection(): Promise<void> {
 		host: process.env[`${ENV}_DB_HOST`],
 		dialect: process.env[`${ENV}_DB_DIALECT`],
 		port: process.env[`${ENV}_DB_PORT`],
-		modelPaths: [Directories.ModelPath],
+		modelPaths: [Directories.getInstance().ModelPath],
 		logging: false
 	};
 

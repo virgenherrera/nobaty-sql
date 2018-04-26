@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { dd } from '../Lib/Debug';
+// import { dd } from '../Lib/Debug';
 
 const parentDir = path.join(__dirname, '../');
 if (process.cwd() !== parentDir.slice(0, -1)) {

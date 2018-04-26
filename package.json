@@ -29,9 +29,8 @@
   "homepage": "https://github.com/virgenherrera/nobaty-sql#readme",
   "scripts": {
     "start": "run-s -l cleanup lint ts:build serve:node",
-    "run": "run-s -l cleanup lint ts:build serve:node",
-    "run:dev": "run-s -l -c cleanup lint ts:build serve:development",
-    "run:production": "run-s production:start",
+    "start:dev": "run-s -l -c cleanup lint ts:build serve:development",
+    "start:production": "run-s production:start",
     "ts:build": "./node_modules/.bin/tsc",
     "ts:build:watch": "./node_modules/.bin/tsc -w",
     "provision": "run-p -l -c provide:env provide-forever-config provide:db:config",
